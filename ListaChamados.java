@@ -120,7 +120,7 @@ public class ListaChamados {
 
     public static void add (Equipamento equipamento, String descricao, Funcionario requisitante,
                             Funcionario responsavel, LocalDateTime dataSolicitacao, Status status, Prioridade prioridade, String textoResolucao) {
-        Chamado chamado = new Chamado(equipamento, descricao, requisitante, responsavel, dataSolicitacao, status, prioridade, textoResolucao);
+        Chamado chamado = new Chamado(equipamento, descricao, requisitante, responsavel, dataSolicitacao, status, prioridade, textoResolucao, null);
         add(chamado);
     }
 

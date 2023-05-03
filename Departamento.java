@@ -4,10 +4,13 @@ import java.util.List;
 public class Departamento {
     private String nome;
     private ArrayList<Funcionario> funcionarios;
+    private ArrayList<Equipamento> equipamentos;
 
     public Departamento(String nome, ArrayList<Funcionario> funcionarios) {
         this.nome = nome;
         this.funcionarios = funcionarios;
+        
+        this.equipamentos = equipamentos;
     }
 
     public String getNome() {
@@ -32,5 +35,14 @@ public class Departamento {
         return nome;
     }
 
+    //retorna o array de equipamentos
+    public ArrayList<Equipamento> getEquipamentos(){
+        return equipamentos;
+    }
+
+    //adiciona um equipamento
+    public boolean addEquipamento(Equipamento e){
+        return equipamentos.add(e);
+    }
     
 }
