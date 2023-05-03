@@ -14,7 +14,8 @@ public class Chamado {
 
     private Status status;
 
-    public Chamado(Equipamento equipamento, String descricao, Funcionario requisitante, Funcionario responsavel, LocalDateTime dataSolicitacao, Status status, String textoResolucao) {
+    public Chamado(Equipamento equipamento, String descricao, Funcionario requisitante, Funcionario responsavel, LocalDateTime dataSolicitacao, Status status,
+                   String textoResolucao) {
         this.equipamento = equipamento;
         this.descricao = descricao;
         this.requisitante = requisitante;
@@ -22,6 +23,9 @@ public class Chamado {
         this.dataSolicitacao = dataSolicitacao;
         this.status = status;
         this.textoResolucao = textoResolucao;
+
+        // automaticamente adiciona o chamado na lista de chamados
+        ListaChamados.add(equipamento, descricao, requisitante, responsavel, dataSolicitacao, status, textoResolucao);
     }
 
     public String getTextoResolucao() {
