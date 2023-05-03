@@ -25,4 +25,12 @@ public class Departamento {
     public void setFuncionarios(ArrayList<Funcionario> funcionarios) {
         this.funcionarios = funcionarios;
     }
+
+    @Override
+    //metodo redundante para ficar mais simples a impressão do nome no departamento dentro do toString de funcionário
+    public String toString() {
+        return nome;
+    }
+
+    
 }
