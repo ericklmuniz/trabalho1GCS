@@ -52,6 +52,7 @@ public class App {
             System.out.println("3: Mover equipamento");
             System.out.println("4: Pesquisar equipamento pela descrição");
             System.out.println("8: Exibir funcionário logado");
+            System.out.println("7: Localizar chamados por uma palavra-chave");
             System.out.println("9: Modificar a lista de chamados");
             //Fazer as outras
             System.out.println("0: Encerrar Programa");
@@ -62,6 +63,8 @@ public class App {
                         encerrado = true;
 
                 case 8 -> System.out.println("Usuário Atual é o " + usuarioAtual);
+
+                case 7 -> System.out.println(ListaChamados.localizarChamados(sc));
                 
                 case 9 -> MenuListaChamados.showMenu();
 
