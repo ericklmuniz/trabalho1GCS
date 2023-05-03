@@ -1,3 +1,3 @@
-public enum Status {
+public enum Prioridade {
     BAIXA, MEDIA, ALTA
 }

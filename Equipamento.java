@@ -48,7 +48,7 @@ public class Equipamento {
 
     private Chamado chamarSuporte(Funcionario solicitante, String descricao) {
         return new Chamado(this,descricao, solicitante, null, LocalDateTime.now(),
-                Status.ABERTO, null);
+                Status.ABERTO, null, "");
     }
 
 }
