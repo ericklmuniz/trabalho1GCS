@@ -14,14 +14,16 @@ public class Chamado {
 
     private Status status;
 
-    public Chamado(Equipamento equipamento, String descricao, Funcionario requisitante, Funcionario responsavel, LocalDateTime dataSolicitacao, Status status,
-                   String textoResolucao) {
+    private Prioridade prioridade;
+
+    public Chamado(Equipamento equipamento, String descricao, Funcionario requisitante, Funcionario responsavel, LocalDateTime dataSolicitacao, Status status, Prioridade prioridade, String textoResolucao) {
         this.equipamento = equipamento;
         this.descricao = descricao;
         this.requisitante = requisitante;
         this.responsavel = responsavel;
         this.dataSolicitacao = dataSolicitacao;
         this.status = status;
+        this.prioridade = prioridade;
         this.textoResolucao = textoResolucao;
 
         // automaticamente adiciona o chamado na lista de chamados
@@ -76,13 +78,19 @@ public class Chamado {
         this.descricao = descricao;
     }
 
-
-
     public void setDataSolicitacao(LocalDateTime dataSolicitacao) {
         this.dataSolicitacao = dataSolicitacao;
     }
 
     public void setStatus(Status status) {
         this.status = status;
+    }
+
+    public void getPrioridade() {
+        return prioridade;
+    }
+
+    public void setPrioridade(Prioridade prioridade) {
+        this.prioridade = prioridade;
     }
 }
