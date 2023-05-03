@@ -2,6 +2,8 @@
 import java.util.*;
 
 public class App {
+
+    private static ListaDepartamentos ld = new ListaDepartamentos();
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
@@ -61,6 +63,23 @@ public class App {
             switch (escolha) {
                 case 0 -> //case de outras funcionalidades
                         encerrado = true;
+
+                case 3 -> //move equipamento de um departamento para outro
+                {
+                    System.out.print("Digite o id do equipamento: ");
+                    Long id = sc.nextLong();
+                    sc.nextLine();
+                    System.out.print("Digite o nome do departamento que você deseja mover o equipamento: ");
+                    String nome = sc.nextLine();
+                    if(ld.moverEquipamento(id,nome)){
+                        System.out.println("Equipamento transferido!");
+                    }
+                    else{ 
+                        System.out.println("Equipamento não foi transferido!");
+                    }
+                    System.out.println();
+                    break;
+                }
 
                 case 8 -> System.out.println("Usuário Atual é o " + usuarioAtual);
 
