@@ -86,7 +86,11 @@ public class Chamado {
         this.status = status;
     }
 
-    public void getPrioridade(Prioridade prioridade) {
+    public void getPrioridade() {
+        return prioridade;
+    }
+
+    public void setPrioridade(Prioridade prioridade) {
         this.prioridade = prioridade;
     }
 }
