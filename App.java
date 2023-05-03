@@ -40,7 +40,7 @@ public class App {
             default -> System.out.println("Entrada inválida. Tente novamente.");
         }
   
-          System.out.println("Usuário Atual: " + usuarioAtual);
+          System.out.println("Usuário Atual é o " + usuarioAtual);
 
         //ESCOLHER FUNCIONARIO ANTES
         boolean encerrado = false;
@@ -51,6 +51,7 @@ public class App {
             System.out.println("2: Atualizar status do chamado");
             System.out.println("3: Mover equipamento");
             System.out.println("4: Pesquisar equipamento pela descrição");
+            System.out.println("8: Exibir funcionário logado");
             System.out.println("9: Modificar a lista de chamados");
             //Fazer as outras
             System.out.println("0: Encerrar Programa");
@@ -60,6 +61,8 @@ public class App {
                 case 0 -> //case de outras funcionalidades
                         encerrado = true;
 
+                case 8 -> System.out.println("Usuário Atual é o " + usuarioAtual);
+                
                 case 9 -> MenuListaChamados.showMenu();
 
                 default -> System.out.println("Entrada inválida. Tente novamente.");
