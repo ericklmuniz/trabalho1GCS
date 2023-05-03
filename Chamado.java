@@ -94,4 +94,12 @@ public class Chamado {
     public void setPrioridade(Prioridade prioridade) {
         this.prioridade = prioridade;
     }
+
+    public boolean atualizaStatus(Funcionario func, Status status) {
+        if (func.isSuporte() && getStatus() == Status.ABERTO) {
+            setStatus(status);
+            return true;
+        }
+        return false;
+    }
 }
