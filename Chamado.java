@@ -16,7 +16,8 @@ public class Chamado {
 
     private Prioridade prioridade;
 
-    public Chamado(Equipamento equipamento, String descricao, Funcionario requisitante, Funcionario responsavel, LocalDateTime dataSolicitacao, Status status, Prioridade prioridade, String textoResolucao) {
+    public Chamado(Equipamento equipamento, String descricao, Funcionario requisitante,
+                   Funcionario responsavel, LocalDateTime dataSolicitacao, Status status, Prioridade prioridade, String textoResolucao) {
         this.equipamento = equipamento;
         this.descricao = descricao;
         this.requisitante = requisitante;
@@ -27,7 +28,7 @@ public class Chamado {
         this.textoResolucao = textoResolucao;
 
         // automaticamente adiciona o chamado na lista de chamados
-        ListaChamados.add(equipamento, descricao, requisitante, responsavel, dataSolicitacao, status, textoResolucao);
+        ListaChamados.add(equipamento, descricao, requisitante, responsavel, dataSolicitacao, status, prioridade ,textoResolucao);
     }
 
     public String getTextoResolucao() {
@@ -86,7 +87,7 @@ public class Chamado {
         this.status = status;
     }
 
-    public void getPrioridade() {
+    public Prioridade getPrioridade() {
         return prioridade;
     }
 
