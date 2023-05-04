@@ -23,7 +23,7 @@ public class App {
         Funcionario cinco = new Funcionario((long)005, "Maria", vendas, false);
         Funcionario seis = new Funcionario((long)005, "Fulana", vendas, false);
         Equipamento equip = new Equipamento((long)800, "Teclado", LocalDate.now(), vendas);
-        Chamado chamado1 = new Chamado(equip, "Teste chamado", tres, quatro, LocalDateTime.now(), Status.EM_ANDAMENTO, Prioridade.MEDIA, "Texto Resolução");
+        Chamado chamado1 = new Chamado(equip,"Teste chamado", tres, quatro, LocalDateTime.now(), Status.EM_ANDAMENTO, Prioridade.MEDIA, "teste", suporte);
 
         Funcionario usuarioAtual = seis; //usario logado no momento
 
