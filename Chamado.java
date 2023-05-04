@@ -16,8 +16,10 @@ public class Chamado {
 
     private Prioridade prioridade;
 
+    private Departamento setor;
+
     public Chamado(Equipamento equipamento, String descricao, Funcionario requisitante,
-                   Funcionario responsavel, LocalDateTime dataSolicitacao, Status status, Prioridade prioridade, String textoResolucao) {
+                   Funcionario responsavel, LocalDateTime dataSolicitacao, Status status, Prioridade prioridade, String textoResolucao, Departamento setor) {
         this.equipamento = equipamento;
         this.descricao = descricao;
         this.requisitante = requisitante;
@@ -26,6 +28,7 @@ public class Chamado {
         this.status = status;
         this.prioridade = prioridade;
         this.textoResolucao = textoResolucao;
+        this.setor = setor;
 
         // automaticamente adiciona o chamado na lista de chamados
         ListaChamados.add(equipamento, descricao, requisitante, responsavel, dataSolicitacao, status, prioridade ,textoResolucao);
@@ -95,6 +98,7 @@ public class Chamado {
         this.prioridade = prioridade;
     }
 
+
     /**
      * Atualiza o status de um chamado respeitando a regra imposta do trabalho:
      * aberto -> em andamento -> concluído
@@ -115,5 +119,26 @@ public class Chamado {
         } // caso queira mudar de CONCLUIDO, não pode atualizar
 
         return false;
+
+    public Departamento getSetor() {
+        return setor;
+    }
+
+    public void setSetor(Departamento setor) {
+        this.setor = setor;
+    }
+
+    //Adicionei para printar chamados localizados
+    public String toString() {
+        return "\n\n" +
+            "equipamento: '" + getEquipamento() + "'" +
+            "\ndescricao: '" + getDescricao() + "'" +
+            "\nrequisitante: '" + getRequisitante() + "'" +
+            "\nresponsavel: '" + getResponsavel() + "'" +
+            "\ntextoResolucao: '" + getTextoResolucao() + "'" +
+            "\ndataSolicitacao: '" + getDataSolicitacao() + "'" +
+            "\nprioridade: '" + getPrioridade() + "'" +
+            "\nstatus: '" + getStatus() + "'" +
+            "\nsetor: '" + getSetor() + "'";
     }
 }

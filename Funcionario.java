@@ -43,5 +43,9 @@ public class Funcionario {
         this.suporte = suporte;
     }
 
-
+    @Override 
+    //metodo para imprimir os elementos necessários para escolher o funcionario no menu
+    public String toString() {
+        return "Funcionario id:" + id + ", nome:" + nome + ", departamento:" + departamento;
+    }
 }

@@ -1,9 +1,13 @@
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class ListaChamados {
     static List<Chamado> chamadosList = new ArrayList<>();
+
+    //ArrayList que armazena chamados localizados.
+    static ArrayList<Chamado> chamadosLocalizados = new ArrayList<>();
 
     private ListaChamados() {
         // empty constructor for consistency
@@ -38,6 +42,69 @@ public class ListaChamados {
         chamadosList.removeIf(chamado -> chamado.getTextoResolucao().equalsIgnoreCase(textoResolucao));
     }
 
+
+    // O sistema deverá permitir localizar chamados por uma palavra-chave.
+    public static String localizarChamados(Scanner in){
+        String saida = "";
+        String palavraChave = "";
+        int opcao = 0;
+
+        System.out.println("Em qual campo deseja localizar:");
+        System.out.println("1: Nome do Requisitante.");
+        System.out.println("2: Nome do Responsavel.");
+        System.out.println("3: Descrição do equipamento.");
+        System.out.println("4: Nome do setor.");
+        System.out.println("5: Texto da solicitação.");
+        System.out.println("6: Texto da resolução.");
+        System.out.println("Digite a opção desejada:");
+        opcao = in.nextInt();
+        in.nextLine();
+        System.out.println("Digite a palavra-chave:");
+        palavraChave = in.nextLine();
+        
+        //Percorre o arraylist e verifica se contem no campo selecionado.
+        for(Chamado localizado : chamadosList){
+            switch(opcao){
+                case 1:
+                    if(localizado.getRequisitante().getNome().contains(palavraChave))
+                        chamadosLocalizados.add(localizado);
+                    break;
+
+                case 2:
+                    if(localizado.getResponsavel().getNome().contains(palavraChave))
+                        chamadosLocalizados.add(localizado);
+                    break;
+
+                case 3:
+                    if(localizado.getEquipamento().getDescricao().contains(palavraChave))
+                        chamadosLocalizados.add(localizado);
+                    break;
+
+                case 4:
+                    if(localizado.getSetor().getNome().contains(palavraChave))
+                        chamadosLocalizados.add(localizado);
+                    break;
+
+                case 5:
+                    if(localizado.getDescricao().contains(palavraChave))
+                        chamadosLocalizados.add(localizado);
+                    break;
+                
+                case 6:
+                    if(localizado.getTextoResolucao().contains(palavraChave))
+                        chamadosLocalizados.add(localizado);
+                    break;
+            }
+        }
+
+        //Para concatenar o toString de cada chamado localizado.
+        for(Chamado chamadoLocalizado : chamadosLocalizados){
+            saida = saida + chamadoLocalizado.toString();
+        }
+        return "\nChamados Localizados: " + saida + "\n";
+    }
+
+
     // métodos padrões
     public static boolean contains(Chamado chamado){
         return chamadosList.contains(chamado);
@@ -53,7 +120,7 @@ public class ListaChamados {
 
     public static void add (Equipamento equipamento, String descricao, Funcionario requisitante,
                             Funcionario responsavel, LocalDateTime dataSolicitacao, Status status, Prioridade prioridade, String textoResolucao) {
-        Chamado chamado = new Chamado(equipamento, descricao, requisitante, responsavel, dataSolicitacao, status, prioridade, textoResolucao);
+        Chamado chamado = new Chamado(equipamento, descricao, requisitante, responsavel, dataSolicitacao, status, prioridade, textoResolucao, null);
         add(chamado);
     }
 

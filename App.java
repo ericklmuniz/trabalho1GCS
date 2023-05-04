@@ -4,6 +4,8 @@ import java.time.LocalDateTime;
 import java.util.*;
 
 public class App {
+
+    private static ListaDepartamentos ld = new ListaDepartamentos();
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
@@ -44,7 +46,7 @@ public class App {
             default -> System.out.println("Entrada inválida. Tente novamente.");
         }
   
-          System.out.println("Usuário Atual: " + usuarioAtual);
+          System.out.println("Usuário Atual é o " + usuarioAtual);
 
         //ESCOLHER FUNCIONARIO ANTES
         boolean encerrado = false;
@@ -55,6 +57,8 @@ public class App {
             System.out.println("2: Atualizar status do chamado");
             System.out.println("3: Mover equipamento");
             System.out.println("4: Pesquisar equipamento pela descrição");
+            System.out.println("8: Exibir funcionário logado");
+            System.out.println("7: Localizar chamados por uma palavra-chave");
             System.out.println("9: Modificar a lista de chamados");
             //Fazer as outras
             System.out.println("0: Encerrar Programa");
@@ -63,12 +67,36 @@ public class App {
             switch (escolha) {
                 case 0 -> //case de outras funcionalidades
                         encerrado = true;
+
                 case 2 -> {
                     if (chamado1.atualizaStatus(usuarioAtual))
                         System.out.println("Status atualizado com sucesso!");
                     else
                         System.out.println("Falha ao atualizar status, checar se é possível a atualização.");
                 }
+
+
+                case 3 -> //move equipamento de um departamento para outro
+                {
+                    System.out.print("Digite o id do equipamento: ");
+                    Long id = sc.nextLong();
+                    sc.nextLine();
+                    System.out.print("Digite o nome do departamento que você deseja mover o equipamento: ");
+                    String nome = sc.nextLine();
+                    if(ld.moverEquipamento(id,nome)){
+                        System.out.println("Equipamento transferido!");
+                    }
+                    else{ 
+                        System.out.println("Equipamento não foi transferido!");
+                    }
+                    System.out.println();
+                    break;
+                }
+
+                case 8 -> System.out.println("Usuário Atual é o " + usuarioAtual);
+
+                case 7 -> System.out.println(ListaChamados.localizarChamados(sc));
+                
                 case 9 -> MenuListaChamados.showMenu();
 
                 default -> System.out.println("Entrada inválida. Tente novamente.");
