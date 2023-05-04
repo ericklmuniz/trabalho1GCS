@@ -99,7 +99,7 @@ public class Chamado {
      * Atualiza o status de um chamado respeitando a regra imposta do trabalho:
      * aberto -> em andamento -> concluído
      * @param func funcionário atual querendo atualizar o status do chamado
-     * @return
+     * @return se o status foi atualiado ou não
      */
     public boolean atualizaStatus(Funcionario func) {
         if (!func.isSuporte()) // se não for do suporte, não pode atualizar
