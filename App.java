@@ -1,4 +1,6 @@
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.*;
 
 public class App {
@@ -20,7 +22,9 @@ public class App {
         Funcionario quatro = new Funcionario((long)004, "Jose", RH, false);
         Funcionario cinco = new Funcionario((long)005, "Maria", vendas, false);
         Funcionario seis = new Funcionario((long)005, "Fulana", vendas, false);
-  
+        Equipamento equip = new Equipamento((long)800, "Teclado", LocalDate.now(), vendas);
+        Chamado chamado1 = new Chamado(equip, "Teste chamado", tres, quatro, LocalDateTime.now(), Status.EM_ANDAMENTO, Prioridade.MEDIA, "Texto Resolução");
+
         Funcionario usuarioAtual = seis; //usario logado no momento
 
         System.out.println("Escolher Funcionario");
@@ -53,10 +57,10 @@ public class App {
             System.out.println("2: Atualizar status do chamado");
             System.out.println("3: Mover equipamento");
             System.out.println("4: Pesquisar equipamento pela descrição");
-            System.out.println("8: Exibir funcionário logado");
-            System.out.println("7: Localizar chamados por uma palavra-chave");
-            System.out.println("9: Modificar a lista de chamados");
             //Fazer as outras
+            System.out.println("7: Localizar chamados por uma palavra-chave");
+            System.out.println("8: Exibir funcionário logado");
+            System.out.println("9: Modificar a lista de chamados");
             System.out.println("0: Encerrar Programa");
             int escolha = sc.nextInt();
 
@@ -64,8 +68,10 @@ public class App {
                 case 0 -> //case de outras funcionalidades
                         encerrado = true;
 
+
                 case 1 -> {
                    Equipamento equipamento = escolherEquipamento(sc, usuarioAtual);
+                   
                    if (Objects.isNull(equipamento)) {
                        System.out.println("Nenhum equipamento disponivel");
                        break;
@@ -77,6 +83,13 @@ public class App {
                     Prioridade prioridade = escolherPrioridade(sc);
 
                     usuarioAtual.abrirChamado(equipamento, descricao, prioridade);
+                }
+
+                case 2 -> {
+                    if (chamado1.atualizaStatus(usuarioAtual))
+                        System.out.println("Status atualizado com sucesso!");
+                    else
+                        System.out.println("Falha ao atualizar status, checar se é possível a atualização.");
                 }
                 case 3 -> //move equipamento de um departamento para outro
                 {
