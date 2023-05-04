@@ -1,5 +1,6 @@
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 
 public class Equipamento {
     private Long id;
@@ -50,5 +51,4 @@ public class Equipamento {
         return new Chamado(this,descricao, solicitante, null, LocalDateTime.now(),
                 Status.ABERTO, null, "", null);
     }
-
 }
