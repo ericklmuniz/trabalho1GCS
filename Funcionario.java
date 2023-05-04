@@ -1,3 +1,5 @@
+import java.time.LocalDateTime;
+
 public class Funcionario {
     private Long id;
     private String nome;
@@ -41,6 +43,11 @@ public class Funcionario {
 
     public void setSuporte(boolean suporte) {
         this.suporte = suporte;
+    }
+
+    public Chamado abrirChamado(Equipamento equipamento, String descricao, Prioridade prioridade) {
+        return new Chamado(equipamento, descricao, this,
+                null, LocalDateTime.now(), Status.ABERTO, prioridade, null, equipamento.getDepartamento());
     }
 
     @Override 

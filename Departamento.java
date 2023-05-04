@@ -10,7 +10,7 @@ public class Departamento {
         this.nome = nome;
         this.funcionarios = funcionarios;
         
-        this.equipamentos = equipamentos;
+        this.equipamentos = new ArrayList<>();
     }
 
     public String getNome() {
