@@ -38,6 +38,10 @@ public class ListaChamados {
         chamadosList.removeIf(chamado -> chamado.getStatus().equals(Status.valueOf(status)));
     }
 
+    public static void removeByPrioridade(String prioridade){
+        chamadosList.removeIf(chamado -> chamado.getPrioridade().equals(Status.valueOf(prioridade)));
+    }
+
     public static void removeByTextoResolucao(String textoResolucao){
         chamadosList.removeIf(chamado -> chamado.getTextoResolucao().equalsIgnoreCase(textoResolucao));
     }

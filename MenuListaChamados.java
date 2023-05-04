@@ -15,7 +15,8 @@ public class MenuListaChamados {
                              4: Remover todos chamados com X Responsável.
                              5: Remover todos chamados com X Data de Solicitação.
                              6: Remover todos chamados com X Status.
-                             7: Remover todos chamados com X Texto de Resolução.
+                             7: Remover todos chamados com X Prioridade.
+                             8: Remover todos chamados com X Texto de Resolução.
                            """);
 
         Scanner menuOption = new Scanner(System.in);
@@ -27,7 +28,8 @@ public class MenuListaChamados {
                 case 4 -> removeByResponsavel();
                 case 5 -> removeByDataSolicitacao();
                 case 6 -> removeByStatus();
-                case 7 -> removeByTextoResolucao();
+                case 7 -> removeByPrioridade();
+                case 8 -> removeByTextoResolucao();
                 default -> throw new IllegalArgumentException("Opção inválida.");
             }
         }
@@ -81,6 +83,14 @@ public class MenuListaChamados {
         Scanner scanner = new Scanner(System.in);
         if(scanner.hasNextLine()){
             ListaChamados.removeByStatus(scanner.nextLine());
+        }
+    }
+
+    private static void removeByPrioridade(){
+        System.out.println("Digite a prioridade do chamado: ");
+        Scanner scanner = new Scanner(System.in);
+        if(scanner.hasNextLine()){
+            ListaChamados.removeByPrioridade(scanner.nextLine());
         }
     }
 
