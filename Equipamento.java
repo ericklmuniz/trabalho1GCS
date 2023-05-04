@@ -51,4 +51,14 @@ public class Equipamento {
         return new Chamado(this,descricao, solicitante, null, LocalDateTime.now(),
                 Status.ABERTO, null, "", null);
     }
+
+    @Override 
+    public String toString() {
+        return "Equipamento{" +
+                "id=" + id +
+                ", descricao='" + descricao + '\'' +
+                ", dataAquisicao=" + dataAquisicao +
+                ", departamento=" + departamento +
+                '}';
+    }
 }

@@ -11,6 +11,7 @@ public class App {
         Scanner sc = new Scanner(System.in);
 
         // objetos pare testes
+        ArrayList<Equipamento> equipamentos = new ArrayList<>();
         ArrayList<Funcionario> funcionariosSuporte = new ArrayList<>();
         Departamento suporte = new Departamento("Suporte", funcionariosSuporte);
         ArrayList<Funcionario> funcionariosVendas = new ArrayList<>();
@@ -108,6 +109,20 @@ public class App {
                     break;
                 }
 
+                case 4 -> // busca equipamento por descrição
+                {
+                    System.out.println("Digite a descrição do equipamento: ");
+                    String descricao = sc.nextLine();
+                    Equipamento equipamento = buscarEquipamentoPorDescricao(descricao, equipamentos);
+                    if (Objects.isNull(equipamento)) {
+                        System.out.println("Equipamento não encontrado!");
+                        break;
+                    }
+                    System.out.println("Equipamento encontrado!");
+                    System.out.println(equipamento.toString());
+                    break;
+                }
+
                 case 8 -> System.out.println("Usuário Atual é o " + usuarioAtual);
 
                 case 7 -> System.out.println(ListaChamados.localizarChamados(sc));
@@ -162,7 +177,7 @@ public class App {
 
     }
 
-    public Equipamento buscarEquipamentoPorDescricao(String descricao, List<Equipamento> listaEquipamentos) {
+    public static Equipamento buscarEquipamentoPorDescricao(String descricao, List<Equipamento> listaEquipamentos) {
         for (Equipamento equipamento : listaEquipamentos) {
             if (equipamento.getDescricao().equalsIgnoreCase(descricao)) {
                 return equipamento;
