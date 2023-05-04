@@ -53,10 +53,10 @@ public class App {
             System.out.println("2: Atualizar status do chamado");
             System.out.println("3: Mover equipamento");
             System.out.println("4: Pesquisar equipamento pela descrição");
-            System.out.println("8: Exibir funcionário logado");
-            System.out.println("7: Localizar chamados por uma palavra-chave");
-            System.out.println("9: Modificar a lista de chamados");
             //Fazer as outras
+            System.out.println("7: Localizar chamados por uma palavra-chave");
+            System.out.println("8: Exibir funcionário logado");
+            System.out.println("9: Modificar a lista de chamados");
             System.out.println("0: Encerrar Programa");
             int escolha = sc.nextInt();
 
