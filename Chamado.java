@@ -30,8 +30,6 @@ public class Chamado {
         this.textoResolucao = textoResolucao;
         this.setor = setor;
 
-        // automaticamente adiciona o chamado na lista de chamados
-        ListaChamados.add(equipamento, descricao, requisitante, responsavel, dataSolicitacao, status, prioridade ,textoResolucao);
     }
 
     public String getTextoResolucao() {
