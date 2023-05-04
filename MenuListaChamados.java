@@ -6,6 +6,9 @@ public class MenuListaChamados {
         // empty constructor for consistency
     }
 
+    /**
+     * Mostra um menu com opções para modificar a lista de chamados por input
+     */
     public static void showMenu(){ // mostra opções de remoção
         System.out.println("""
                              Escolha a opção desejada:
@@ -17,6 +20,7 @@ public class MenuListaChamados {
                              6: Remover todos chamados com X Status.
                              7: Remover todos chamados com X Prioridade.
                              8: Remover todos chamados com X Texto de Resolução.
+                             9: Limpar lista.
                            """);
 
         Scanner menuOption = new Scanner(System.in);
@@ -30,13 +34,20 @@ public class MenuListaChamados {
                 case 6 -> removeByStatus();
                 case 7 -> removeByPrioridade();
                 case 8 -> removeByTextoResolucao();
+                case 9 -> clearListaChamados();
                 default -> throw new IllegalArgumentException("Opção inválida.");
             }
         }
 
     }
 
+
+
     // métodos para remoção de chamados a partir de um atributo determinado no input do usuário
+
+    private static void clearListaChamados() {
+        ListaChamados.clearList();
+    }
 
     private static void removeByEquipamento(){
         System.out.println("Digite o ID do equipamento: ");

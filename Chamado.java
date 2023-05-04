@@ -119,6 +119,7 @@ public class Chamado {
         } // caso queira mudar de CONCLUIDO, não pode atualizar
 
         return false;
+    }
 
     public Departamento getSetor() {
         return setor;

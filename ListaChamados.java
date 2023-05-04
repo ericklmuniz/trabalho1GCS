@@ -46,10 +46,19 @@ public class ListaChamados {
         chamadosList.removeIf(chamado -> chamado.getTextoResolucao().equalsIgnoreCase(textoResolucao));
     }
 
+    public static void clearList(){
+        chamadosList.clear();
+    }
 
-    // O sistema deverá permitir localizar chamados por uma palavra-chave.
+
+    /**
+     * O sistema deverá permitir localizar chamados por uma palavra-chave
+     *
+     * @param in input para determinar a opção desejada
+     * @return StringBuilder contendo todos chamados que possuem a palavra-chave
+     */
     public static String localizarChamados(Scanner in){
-        String saida = "";
+        StringBuilder saida = new StringBuilder();
         String palavraChave = "";
         int opcao = 0;
 
@@ -103,7 +112,7 @@ public class ListaChamados {
 
         //Para concatenar o toString de cada chamado localizado.
         for(Chamado chamadoLocalizado : chamadosLocalizados){
-            saida = saida + chamadoLocalizado.toString();
+            saida.append(chamadoLocalizado.toString());
         }
         return "\nChamados Localizados: " + saida + "\n";
     }
