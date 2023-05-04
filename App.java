@@ -63,7 +63,12 @@ public class App {
             switch (escolha) {
                 case 0 -> //case de outras funcionalidades
                         encerrado = true;
-
+                case 2 -> {
+                    if (chamado1.atualizaStatus(usuarioAtual))
+                        System.out.println("Status atualizado com sucesso!");
+                    else
+                        System.out.println("Falha ao atualizar status, checar se é possível a atualização.");
+                }
                 case 9 -> MenuListaChamados.showMenu();
 
                 default -> System.out.println("Entrada inválida. Tente novamente.");
