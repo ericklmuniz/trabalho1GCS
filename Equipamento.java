@@ -51,4 +51,13 @@ public class Equipamento {
                 Status.ABERTO, null, "", null);
     }
 
+    @Override 
+    public String toString() {
+        return "Equipamento{" +
+                "id=" + id +
+                ", descricao='" + descricao + '\'' +
+                ", dataAquisicao=" + dataAquisicao +
+                ", departamento=" + departamento +
+                '}';
+    }
 }
