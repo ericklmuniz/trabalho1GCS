@@ -26,7 +26,7 @@ public class Chamado {
         this.responsavel = responsavel;
         this.dataSolicitacao = dataSolicitacao;
         this.status = status;
-        this.prioridade = prioridade;
+        this.prioridade = prioridade; // inicializa com a prioridade escolhida pelo usuário
         this.textoResolucao = textoResolucao;
         this.setor = setor;
 
