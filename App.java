@@ -11,7 +11,6 @@ public class App {
         Scanner sc = new Scanner(System.in);
 
         // objetos pare testes
-        ArrayList<Equipamento> equipamentos = new ArrayList<>();
         ArrayList<Funcionario> funcionariosSuporte = new ArrayList<>();
         Departamento suporte = new Departamento("Suporte", funcionariosSuporte);
         ArrayList<Funcionario> funcionariosVendas = new ArrayList<>();
@@ -24,9 +23,15 @@ public class App {
         Funcionario quatro = new Funcionario((long) 004, "Jose", RH, false);
         Funcionario cinco = new Funcionario((long) 005, "Maria", vendas, false);
         Funcionario seis = new Funcionario((long) 005, "Fulana", vendas, false);
-        Equipamento equip = new Equipamento((long) 800, "Teclado", LocalDate.now(), vendas);
-        Chamado chamado1 = new Chamado(equip, "Teste chamado", tres, quatro, LocalDateTime.now(), Status.EM_ANDAMENTO,
-                Prioridade.MEDIA, "teste", suporte);
+        // Chamado chamado1 = new Chamado(equip, "Teste chamado", tres, quatro, LocalDateTime.now(), Status.EM_ANDAMENTO,
+        //         Prioridade.MEDIA, "teste", suporte);
+
+        ArrayList<Equipamento> equipamentos = new ArrayList<>();
+        equipamentos.add(new Equipamento(1L, "Notebook Dell", LocalDate.of(2021, 4, 15), vendas));
+        equipamentos.add(new Equipamento(2L, "Monitor Samsung", LocalDate.of(2021, 3, 20), suporte));
+        equipamentos.add(new Equipamento(3L, "Impressora HP", LocalDate.of(2021, 2, 10), suporte));
+        equipamentos.add(new Equipamento(4L, "Projetor Epson", LocalDate.of(2021, 1, 5), RH));
+        equipamentos.add(new Equipamento(5L, "Teclado Logitech", LocalDate.of(2021, 5, 2), vendas));
 
         Funcionario usuarioAtual = seis; // usario logado no momento
 
@@ -87,12 +92,12 @@ public class App {
                     usuarioAtual.abrirChamado(equipamento, descricao, prioridade);
                 }
 
-                case 2 -> {
-                    if (chamado1.atualizaStatus(usuarioAtual))
-                        System.out.println("Status atualizado com sucesso!");
-                    else
-                        System.out.println("Falha ao atualizar status, checar se é possível a atualização.");
-                }
+                // case 2 -> {
+                //     if (chamado1.atualizaStatus(usuarioAtual))
+                //         System.out.println("Status atualizado com sucesso!");
+                //     else
+                //         System.out.println("Falha ao atualizar status, checar se é possível a atualização.");
+                // }
                 case 3 -> // move equipamento de um departamento para outro
                 {
                     System.out.print("Digite o id do equipamento: ");
@@ -111,9 +116,11 @@ public class App {
 
                 case 4 -> // busca equipamento por descrição
                 {
-                    System.out.println("Digite a descrição do equipamento: ");
+                    System.out.println("Digite a descricao do equipamento: ");
+                    sc.nextLine();
                     String descricao = sc.nextLine();
                     Equipamento equipamento = buscarEquipamentoPorDescricao(descricao, equipamentos);
+                    System.out.println(equipamento.getId());
                     if (Objects.isNull(equipamento)) {
                         System.out.println("Equipamento não encontrado!");
                         break;
@@ -178,8 +185,9 @@ public class App {
     }
 
     public static Equipamento buscarEquipamentoPorDescricao(String descricao, List<Equipamento> listaEquipamentos) {
+
         for (Equipamento equipamento : listaEquipamentos) {
-            if (equipamento.getDescricao().equalsIgnoreCase(descricao)) {
+            if (equipamento.getDescricao().toLowerCase().equals(descricao.toLowerCase())) {
                 return equipamento;
             }
         }
