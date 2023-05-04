@@ -98,6 +98,28 @@ public class Chamado {
         this.prioridade = prioridade;
     }
 
+
+    /**
+     * Atualiza o status de um chamado respeitando a regra imposta do trabalho:
+     * aberto -> em andamento -> concluído
+     * @param func funcionário atual querendo atualizar o status do chamado
+     * @return se o status foi atualiado ou não
+     */
+    public boolean atualizaStatus(Funcionario func) {
+        if (!func.isSuporte()) // se não for do suporte, não pode atualizar
+            return false;
+
+        Status statAtual = getStatus();
+        if (statAtual == Status.ABERTO) {
+            setStatus(Status.EM_ANDAMENTO);
+            return true;
+        } else if (statAtual == Status.EM_ANDAMENTO) {
+            setStatus(Status.CONCLUIDO);
+            return true;
+        } // caso queira mudar de CONCLUIDO, não pode atualizar
+
+        return false;
+
     public Departamento getSetor() {
         return setor;
     }
