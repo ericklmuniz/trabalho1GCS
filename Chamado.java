@@ -1,7 +1,7 @@
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-public class Chamado {
+public class Chamado implements Comparable<Chamado> {
     private Equipamento equipamento;
     private String descricao;
     private Funcionario requisitante;
@@ -13,7 +13,8 @@ public class Chamado {
     private Departamento setor;
 
     public Chamado(Equipamento equipamento, String descricao, Funcionario requisitante,
-                   Funcionario responsavel, LocalDateTime dataSolicitacao, Status status, Prioridade prioridade, String textoResolucao, Departamento setor) {
+            Funcionario responsavel, LocalDateTime dataSolicitacao, Status status, Prioridade prioridade,
+            String textoResolucao, Departamento setor) {
         this.equipamento = equipamento;
         this.descricao = descricao;
         this.requisitante = requisitante;
@@ -89,10 +90,10 @@ public class Chamado {
         this.prioridade = prioridade;
     }
 
-
     /**
      * Atualiza o status de um chamado respeitando a regra imposta do trabalho:
      * aberto -> em andamento -> concluído
+     * 
      * @param func funcionário atual querendo atualizar o status do chamado
      * @return se o status foi atualizado ou não
      */
@@ -115,8 +116,8 @@ public class Chamado {
     /**
      * adiciona o chamado atual à lista correspondente a seu estado atual
      */
-    public void addChamadoToListByStatus(){
-        switch(getStatus()) {
+    public void addChamadoToListByStatus() {
+        switch (getStatus()) {
             case ABERTO -> ListaChamados.chamadosAbertosList.add(this);
             case EM_ANDAMENTO -> ListaChamados.chamadosEmAndamentoList.add(this);
             case CONCLUIDO -> ListaChamados.chamadosConcluidosList.add(this);
@@ -131,17 +132,23 @@ public class Chamado {
         this.setor = setor;
     }
 
-    //Adicionei para printar chamados localizados
+    // Adicionei para printar chamados localizados
     public String toString() {
         return "\n\n" +
-            "equipamento: '" + getEquipamento() + "'" +
-            "\ndescricao: '" + getDescricao() + "'" +
-            "\nrequisitante: '" + getRequisitante() + "'" +
-            "\nresponsavel: '" + getResponsavel() + "'" +
-            "\ntextoResolucao: '" + getTextoResolucao() + "'" +
-            "\ndataSolicitacao: '" + getDataSolicitacao() + "'" +
-            "\nprioridade: '" + getPrioridade() + "'" +
-            "\nstatus: '" + getStatus() + "'" +
-            "\nsetor: '" + getSetor() + "'";
+                "equipamento: '" + getEquipamento() + "'" +
+                "\ndescricao: '" + getDescricao() + "'" +
+                "\nrequisitante: '" + getRequisitante() + "'" +
+                "\nresponsavel: '" + getResponsavel() + "'" +
+                "\ntextoResolucao: '" + getTextoResolucao() + "'" +
+                "\ndataSolicitacao: '" + getDataSolicitacao() + "'" +
+                "\nprioridade: '" + getPrioridade() + "'" +
+                "\nstatus: '" + getStatus() + "'" +
+                "\nsetor: '" + getSetor() + "'";
+    }
+
+    // chamados comparaveis por data de solicitacao
+    @Override
+    public int compareTo(Chamado outro) {
+        return this.dataSolicitacao.compareTo(outro.dataSolicitacao);
     }
 }
