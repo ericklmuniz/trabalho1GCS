@@ -93,6 +93,7 @@ public class App {
                     Prioridade prioridade = escolherPrioridade(sc);
 
                     usuarioAtual.abrirChamado(equipamento, descricao, prioridade);
+                    System.out.println("Chamado aberto com sucesso");
                 }
 
                 // case 2 -> {
@@ -101,8 +102,7 @@ public class App {
                 //     else
                 //         System.out.println("Falha ao atualizar status, checar se é possível a atualização.");
                 // }
-                
-                case 3 -> //move equipamento de um departamento para outro
+                case 3 -> // move equipamento de um departamento para outro
                     listaDepartamentos.opcaoMoveEquipamento(sc);
 
                 case 4 -> // busca equipamento por descrição
@@ -126,7 +126,6 @@ public class App {
                 case 9 -> MenuListaChamados.showMenu();
 
                 case 10 -> painelDeChamados(ListaChamados.getChamadosList());
-
                 case 11 -> listaDepartamentos.addEquipamentosAoDepartamento(sc);
                 
                 default -> System.out.println("Entrada inválida. Tente novamente.");
@@ -144,10 +143,10 @@ public class App {
             System.out.println("Total de chamados abertos: " + chamadosAbertos + " - " + chamadosAbertos*100.0/totalChamados + "%");
 
             int chamadosEmAndamento = chamados.stream().filter(chamado -> chamado.getStatus().equals(Status.EM_ANDAMENTO)).toList().size();
-            System.out.println("Total de chamados abertos: " + chamadosEmAndamento + " - " + chamadosEmAndamento*100.0/totalChamados + "%");
+            System.out.println("Total de chamados em andamento: " + chamadosEmAndamento + " - " + chamadosEmAndamento*100.0/totalChamados + "%");
 
             int chamadosConcluidos = chamados.stream().filter(chamado -> chamado.getStatus().equals(Status.CONCLUIDO)).toList().size();
-            System.out.println("Total de chamados abertos: " + chamadosConcluidos + " - " + chamadosConcluidos*100.0/totalChamados + "%");
+            System.out.println("Total de chamados concluidos: " + chamadosConcluidos + " - " + chamadosConcluidos*100.0/totalChamados + "%");
         }
 
     }
