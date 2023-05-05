@@ -6,10 +6,10 @@ import java.util.stream.Collectors;
 
 public class App {
 
-    private static ListaDepartamentos ld = new ListaDepartamentos();
-
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
+        
+        ListaDepartamentos listaDepartamentos = new ListaDepartamentos();
 
         // objetos pare testes
         Departamento suporte = new Departamento("Suporte");
@@ -49,6 +49,7 @@ public class App {
             System.out.println("8: Exibir funcionário logado");
             System.out.println("9: Modificar a lista de chamados");
             System.out.println("10: Painel de chamados");
+            System.out.println("11: Adiciona novo equipamento");
             System.out.println("0: Encerrar Programa");
             int escolha = sc.nextInt();
 
@@ -79,20 +80,9 @@ public class App {
 //                     else
 //                         System.out.println("Falha ao atualizar status, checar se é possível a atualização.");
 //                 }
+
                 case 3 -> // move equipamento de um departamento para outro
-                {
-                    System.out.print("Digite o id do equipamento: ");
-                    Long id = sc.nextLong();
-                    sc.nextLine();
-                    System.out.print("Digite o nome do departamento que você deseja mover o equipamento: ");
-                    String nome = sc.nextLine();
-                    if (ld.moverEquipamento(id, nome)) {
-                        System.out.println("Equipamento transferido!");
-                    } else {
-                        System.out.println("Equipamento não foi transferido!");
-                    }
-                    System.out.println();
-                }
+                    listaDepartamentos.opcaoMoveEquipamento(sc);
 
                 case 4 -> // busca equipamento por descrição
                 {
@@ -115,7 +105,8 @@ public class App {
                 case 9 -> MenuListaChamados.showMenu();
 
                 case 10 -> painelDeChamados(ListaChamados.getChamadosList());
-
+                case 11 -> listaDepartamentos.addEquipamentosAoDepartamento(sc);
+                
                 default -> System.out.println("Entrada inválida. Tente novamente.");
             }
         } while (!encerrado);
@@ -194,12 +185,6 @@ public class App {
 
     }
 
-    /**
-     *
-     * @param descricao
-     * @param listaEquipamentos
-     * @return equipamento com a mesma descrição passada por parâmetro, ou null
-     */
     public static Equipamento buscarEquipamentoPorDescricao(String descricao, List<Equipamento> listaEquipamentos) {
 
         for (Equipamento equipamento : listaEquipamentos) {
