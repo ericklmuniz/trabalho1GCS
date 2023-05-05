@@ -44,5 +44,10 @@ public class Departamento {
     public boolean addEquipamento(Equipamento e){
         return equipamentos.add(e);
     }
+    //adiciona um array de 1 ou mais equipamentos ao array principal
+    public void addEquipamentos(ArrayList<Equipamento> e){
+        for(int i = 0; i<e.size();i++)
+        equipamentos.add(e.get(i));
+    }
     
 }
