@@ -6,16 +6,10 @@ public class Chamado {
     private String descricao;
     private Funcionario requisitante;
     private Funcionario responsavel;
-
     private String textoResolucao;
-
-
     private LocalDateTime dataSolicitacao;
-
     private Status status;
-
     private Prioridade prioridade;
-
     private Departamento setor;
 
     public Chamado(Equipamento equipamento, String descricao, Funcionario requisitante,
@@ -29,7 +23,6 @@ public class Chamado {
         this.prioridade = prioridade; // inicializa com a prioridade escolhida pelo usuário
         this.textoResolucao = textoResolucao;
         this.setor = setor;
-
     }
 
     public String getTextoResolucao() {
@@ -100,6 +93,7 @@ public class Chamado {
     /**
      * Atualiza o status de um chamado respeitando a regra imposta do trabalho:
      * aberto -> em andamento -> concluído
+     * se chamado está concluído, então é adicionado a lista de chamados
      * @param func funcionário atual querendo atualizar o status do chamado
      * @return se o status foi atualiado ou não
      */
@@ -113,6 +107,7 @@ public class Chamado {
             return true;
         } else if (statAtual == Status.EM_ANDAMENTO) {
             setStatus(Status.CONCLUIDO);
+            ListaChamados.add(this);
             return true;
         } // caso queira mudar de CONCLUIDO, não pode atualizar
 
