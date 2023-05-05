@@ -8,7 +8,7 @@ public class App {
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        
+
         ListaDepartamentos listaDepartamentos = new ListaDepartamentos();
 
         // objetos pare testes
@@ -55,7 +55,7 @@ public class App {
 
             switch (escolha) {
                 case 0 -> // case de outras funcionalidades
-                    encerrado = true;
+                        encerrado = true;
 
                 case 1 -> {
                     Equipamento equipamento = escolherEquipamento(sc, usuarioAtual);
@@ -74,15 +74,17 @@ public class App {
                     System.out.println("Chamado aberto com sucesso");
                 }
 
-//                 case 2 -> {
-//                     if (chamado1.atualizaStatus(usuarioAtual))
-//                         System.out.println("Status atualizado com sucesso!");
-//                     else
-//                         System.out.println("Falha ao atualizar status, checar se é possível a atualização.");
-//                 }
+                case 2 -> {
+                    List<Chamado> auxListaChamado = ListaChamados.getChamadosList();
+                    Chamado auxChamado = auxListaChamado.get(auxListaChamado.size()-1);
+                    if (auxChamado.atualizaStatus(usuarioAtual))
+                        System.out.println("Status atualizado com sucesso!");
+                    else
+                        System.out.println("Falha ao atualizar status, checar se é possível a atualização.");
+                }
 
                 case 3 -> // move equipamento de um departamento para outro
-                    listaDepartamentos.opcaoMoveEquipamento(sc);
+                        listaDepartamentos.opcaoMoveEquipamento(sc);
 
                 case 4 -> // busca equipamento por descrição
                 {
@@ -106,7 +108,7 @@ public class App {
 
                 case 10 -> painelDeChamados(ListaChamados.getChamadosList());
                 case 11 -> listaDepartamentos.addEquipamentosAoDepartamento(sc);
-                
+
                 default -> System.out.println("Entrada inválida. Tente novamente.");
             }
         } while (!encerrado);
