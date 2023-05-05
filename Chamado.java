@@ -112,6 +112,17 @@ public class Chamado {
         return false;
     }
 
+    /**
+     * adiciona o chamado atual à lista correspondente a seu estado atual
+     */
+    public void addChamadoToListByStatus(){
+        switch(getStatus()) {
+            case ABERTO -> ListaChamados.chamadosAbertosList.add(this);
+            case EM_ANDAMENTO -> ListaChamados.chamadosEmAndamentoList.add(this);
+            case CONCLUIDO -> ListaChamados.chamadosConcluidosList.add(this);
+        }
+    }
+
     public Departamento getSetor() {
         return setor;
     }
