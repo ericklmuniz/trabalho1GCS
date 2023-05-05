@@ -208,19 +208,25 @@ public class App {
 
     public static Prioridade escolherPrioridade(Scanner sc) {
         System.out.println("Escolha a prioridade do chamado");
-        System.out.println("0 - " + "Baixa");
-        System.out.println("1 - " + "Media");
-        System.out.println("2 - " + "Alta");
+        System.out.println("1 - " + "Mínima");
+        System.out.println("2 - " + "Baixa");
+        System.out.println("3 - " + "Média");
+        System.out.println("4 - " + "Alta");
+        System.out.println("5 - " + "Urgente");
 
         String prioridadeEscolhida = sc.nextLine();
 
         switch (prioridadeEscolhida) {
-            case "0":
-                return Prioridade.BAIXA;
             case "1":
-                return Prioridade.MEDIA;
+                return Prioridade.MINIMA;
             case "2":
+                return Prioridade.BAIXA;
+            case "3":
+                return Prioridade.MEDIA;
+            case "4":
                 return Prioridade.ALTA;
+            case "5":
+                return Prioridade.URGENTE;
             default:
                 System.out.println("Escolha uma prioridade válida!");
                 return escolherPrioridade(sc);
