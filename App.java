@@ -60,7 +60,7 @@ public class App {
 
             switch (escolha) {
                 case 0 -> // case de outras funcionalidades
-                    encerrado = true;
+                        encerrado = true;
 
                 case 1 -> {
                     Equipamento equipamento = escolherEquipamento(sc, usuarioAtual);
@@ -80,17 +80,16 @@ public class App {
                 }
 
                 case 2 -> {
-                    // TODO implementar método para atualizar status do chamado desejado
-
-                    // if (chamado1.atualizaStatus(usuarioAtual))
-                    // System.out.println("Status atualizado com sucesso!");
-                    // else
-                    // System.out.println("Falha ao atualizar status, checar se é possível a
-                    // atualização.");
+                    List<Chamado> auxListaChamado = ListaChamados.getChamadosList();
+                    Chamado auxChamado = auxListaChamado.get(auxListaChamado.size()-1);
+                    if (auxChamado.atualizaStatus(usuarioAtual))
+                        System.out.println("Status atualizado com sucesso!");
+                    else
+                        System.out.println("Falha ao atualizar status, checar se é possível a atualização.");
                 }
 
                 case 3 -> // move equipamento de um departamento para outro
-                    listaDepartamentos.opcaoMoveEquipamento(sc);
+                        listaDepartamentos.opcaoMoveEquipamento(sc);
 
                 case 4 -> // busca equipamento por descrição
                 {
