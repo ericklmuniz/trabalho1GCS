@@ -6,9 +6,9 @@ public class Departamento {
     private ArrayList<Funcionario> funcionarios;
     private ArrayList<Equipamento> equipamentos;
 
-    public Departamento(String nome, ArrayList<Funcionario> funcionarios) {
+    public Departamento(String nome) {
         this.nome = nome;
-        this.funcionarios = funcionarios;
+        this.funcionarios = new ArrayList<>();
         
         this.equipamentos = new ArrayList<>();
     }
@@ -44,10 +44,16 @@ public class Departamento {
     public boolean addEquipamento(Equipamento e){
         return equipamentos.add(e);
     }
+
+    public boolean addFuncionario(Funcionario funcionario){
+        return funcionarios.add(funcionario);
+    }
+
+
     //adiciona um array de 1 ou mais equipamentos ao array principal
     public void addEquipamentos(ArrayList<Equipamento> e){
         for(int i = 0; i<e.size();i++)
         equipamentos.add(e.get(i));
     }
-    
+
 }

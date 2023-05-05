@@ -11,6 +11,7 @@ public class Funcionario {
         this.nome = nome;
         this.departamento = departamento;
         this.suporte = suporte;
+        departamento.addFuncionario(this);
     }
 
     public Long getId() {
