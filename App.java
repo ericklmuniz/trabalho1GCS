@@ -50,6 +50,10 @@ public class App {
             System.out.println("9: Modificar a lista de chamados");
             System.out.println("10: Painel de chamados");
             System.out.println("11: Adiciona novo equipamento");
+            System.out.println("12: Mostra todos chamados");
+            System.out.println("13: Mostra todos chamados abertos");
+            System.out.println("14: Mostra todos chamados em andamento");
+            System.out.println("15: Mostra todos chamados fechados");
             System.out.println("0: Encerrar Programa");
             int escolha = sc.nextInt();
 
@@ -74,12 +78,14 @@ public class App {
                     System.out.println("Chamado aberto com sucesso");
                 }
 
-//                 case 2 -> {
+                 case 2 -> {
+                    //TODO implementar método para atualizar status do chamado desejado
+
 //                     if (chamado1.atualizaStatus(usuarioAtual))
 //                         System.out.println("Status atualizado com sucesso!");
 //                     else
 //                         System.out.println("Falha ao atualizar status, checar se é possível a atualização.");
-//                 }
+                 }
 
                 case 3 -> // move equipamento de um departamento para outro
                     listaDepartamentos.opcaoMoveEquipamento(sc);
@@ -106,6 +112,12 @@ public class App {
 
                 case 10 -> painelDeChamados(ListaChamados.getChamadosList());
                 case 11 -> listaDepartamentos.addEquipamentosAoDepartamento(sc);
+
+                // printar listas de chamados
+                case 12 -> System.out.println(ListaChamados.getChamadosList());
+                case 13 -> System.out.println(ListaChamados.getChamadosAbertosList());
+                case 14 -> System.out.println(ListaChamados.getChamadosEmAndamentoList());
+                case 15 -> System.out.println(ListaChamados.getChamadosConcluidosList());
                 
                 default -> System.out.println("Entrada inválida. Tente novamente.");
             }
