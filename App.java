@@ -114,6 +114,18 @@ public class App {
                         break;
                     }
 
+                    List<Chamado> chamadosDoEquipamento = ListaChamados.getChamadosList().stream()
+                            .filter(chamado -> chamado.getEquipamento().getId().equals(equipamento.getId())).toList();
+
+                    if (chamadosDoEquipamento.isEmpty()) {
+                        System.out.println("Equipamento não possui chamados");
+                        break;
+                    }
+
+                    Collections.sort(ListaChamados.getChamadosList());
+
+                    ListaChamados.getChamadosList().forEach(System.out::println);
+
                 }
 
                 case 7 -> System.out.println(ListaChamados.localizarChamados(sc));
