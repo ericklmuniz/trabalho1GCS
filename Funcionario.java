@@ -45,9 +45,17 @@ public class Funcionario {
         this.suporte = suporte;
     }
 
+
+    /**
+     * abre um novo chamado e o adiciona à lista de chamados
+     * @param equipamento equipamento do chamado
+     * @param descricao descrição do chamado
+     * @param prioridade prioridade do chamado
+     */
     public void abrirChamado(Equipamento equipamento, String descricao, Prioridade prioridade) {
         Chamado chamado = new Chamado(equipamento, descricao, this,
                 null, LocalDateTime.now(), Status.ABERTO, prioridade, null, equipamento.getDepartamento());
+        ListaChamados.add(chamado);
     }
 
     @Override 

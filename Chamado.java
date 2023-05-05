@@ -93,9 +93,8 @@ public class Chamado {
     /**
      * Atualiza o status de um chamado respeitando a regra imposta do trabalho:
      * aberto -> em andamento -> concluído
-     * se chamado está concluído, então é adicionado a lista de chamados
      * @param func funcionário atual querendo atualizar o status do chamado
-     * @return se o status foi atualiado ou não
+     * @return se o status foi atualizado ou não
      */
     public boolean atualizaStatus(Funcionario func) {
         if (!func.isSuporte()) // se não for do suporte, não pode atualizar
@@ -107,7 +106,6 @@ public class Chamado {
             return true;
         } else if (statAtual == Status.EM_ANDAMENTO) {
             setStatus(Status.CONCLUIDO);
-            ListaChamados.add(this);
             return true;
         } // caso queira mudar de CONCLUIDO, não pode atualizar
 
