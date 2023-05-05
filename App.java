@@ -12,20 +12,17 @@ public class App {
         Scanner sc = new Scanner(System.in);
 
         // objetos pare testes
-        ArrayList<Funcionario> funcionariosSuporte = new ArrayList<>();
-        Departamento suporte = new Departamento("Suporte", funcionariosSuporte);
-        ArrayList<Funcionario> funcionariosVendas = new ArrayList<>();
-        Departamento vendas = new Departamento("Vendas", funcionariosSuporte);
-        ArrayList<Funcionario> funcionariosRH = new ArrayList<>();
-        Departamento RH = new Departamento("Recursos Humanos", funcionariosRH);
-        Funcionario um = new Funcionario((long) 001, "Marcelo", suporte, true);
-        Funcionario dois = new Funcionario((long) 002, "Pedro", suporte, true);
-        Funcionario tres = new Funcionario((long) 003, "Artur", RH, false);
-        Funcionario quatro = new Funcionario((long) 004, "Jose", RH, false);
-        Funcionario cinco = new Funcionario((long) 005, "Maria", vendas, false);
-        Funcionario seis = new Funcionario((long) 005, "Fulana", vendas, false);
-        // Chamado chamado1 = new Chamado(equip, "Teste chamado", tres, quatro, LocalDateTime.now(), Status.EM_ANDAMENTO,
-        //         Prioridade.MEDIA, "teste", suporte);
+        Departamento suporte = new Departamento("Suporte");
+        Departamento vendas = new Departamento("Vendas");
+        Departamento RH = new Departamento("Recursos Humanos");
+
+        ArrayList<Funcionario> funcionarios = new ArrayList<>();
+        funcionarios.add(new Funcionario(1L, "Marcelo", suporte, true));
+        funcionarios.add(new Funcionario(2L, "Pedro", suporte, true));
+        funcionarios.add(new Funcionario(3L, "Artur", RH, false));
+        funcionarios.add(new Funcionario(4L, "Jose", RH, false));
+        funcionarios.add(new Funcionario(5L, "Maria", vendas, false));
+        funcionarios.add(new Funcionario(6L, "Fulana", vendas, false));
 
         ArrayList<Equipamento> equipamentos = new ArrayList<>();
         equipamentos.add(new Equipamento(1L, "Notebook Dell", LocalDate.of(2021, 4, 15), vendas));
@@ -34,26 +31,7 @@ public class App {
         equipamentos.add(new Equipamento(4L, "Projetor Epson", LocalDate.of(2021, 1, 5), RH));
         equipamentos.add(new Equipamento(5L, "Teclado Logitech", LocalDate.of(2021, 5, 2), vendas));
 
-        Funcionario usuarioAtual = seis; // usuario logado no momento
-
-        System.out.println("Escolher Funcionario");
-        System.out.println("1: " + um.toString());
-        System.out.println("2: " + dois.toString());
-        System.out.println("3: " + tres.toString());
-        System.out.println("4: " + quatro.toString());
-        System.out.println("5: " + cinco.toString());
-        System.out.println("6: " + seis.toString());
-        int opcao = sc.nextInt();
-
-        switch (opcao) {
-            case 1 -> usuarioAtual = um;
-            case 2 -> usuarioAtual = dois;
-            case 3 -> usuarioAtual = tres;
-            case 4 -> usuarioAtual = quatro;
-            case 5 -> usuarioAtual = cinco;
-            case 6 -> usuarioAtual = seis;
-            default -> System.out.println("Entrada inválida. Tente novamente.");
-        }
+        Funcionario usuarioAtual = escolherFuncionario(sc, funcionarios);
 
         System.out.println("Usuário Atual é o " + usuarioAtual);
 
@@ -95,12 +73,12 @@ public class App {
                     System.out.println("Chamado aberto com sucesso");
                 }
 
-                 case 2 -> {
-                     if (chamado1.atualizaStatus(usuarioAtual))
-                         System.out.println("Status atualizado com sucesso!");
-                     else
-                         System.out.println("Falha ao atualizar status, checar se é possível a atualização.");
-                 }
+//                 case 2 -> {
+//                     if (chamado1.atualizaStatus(usuarioAtual))
+//                         System.out.println("Status atualizado com sucesso!");
+//                     else
+//                         System.out.println("Falha ao atualizar status, checar se é possível a atualização.");
+//                 }
                 case 3 -> // move equipamento de um departamento para outro
                 {
                     System.out.print("Digite o id do equipamento: ");
@@ -141,6 +119,18 @@ public class App {
                 default -> System.out.println("Entrada inválida. Tente novamente.");
             }
         } while (!encerrado);
+    }
+
+    private static Funcionario escolherFuncionario(Scanner sc, List<Funcionario> funcionarios) {
+        System.out.println("Escolher Funcionario por ID");
+        funcionarios.forEach(System.out::println);
+        String opcao = sc.nextLine();
+
+        Optional<Funcionario> usuarioAtual = funcionarios.stream().filter(funcionario ->String.valueOf(funcionario.getId()).equals(opcao)).findFirst();
+        return usuarioAtual.orElseGet(() -> {
+            System.out.println("Escolha um funcionário válido");
+            return escolherFuncionario(sc, funcionarios);
+        });
     }
 
     private static void painelDeChamados( List<Chamado> chamados) {
