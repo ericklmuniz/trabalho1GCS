@@ -45,11 +45,16 @@ public class App {
             System.out.println("3: Mover equipamento");
             System.out.println("4: Pesquisar equipamento pela descrição");
             // Fazer as outras
+            System.out.println("6: Exibir lista de chamados");
             System.out.println("7: Localizar chamados por uma palavra-chave");
             System.out.println("8: Exibir funcionário logado");
             System.out.println("9: Modificar a lista de chamados");
             System.out.println("10: Painel de chamados");
             System.out.println("11: Adiciona novo equipamento");
+            System.out.println("12: Mostra todos chamados");
+            System.out.println("13: Mostra todos chamados abertos");
+            System.out.println("14: Mostra todos chamados em andamento");
+            System.out.println("15: Mostra todos chamados fechados");
             System.out.println("0: Encerrar Programa");
             int escolha = sc.nextInt();
 
@@ -100,6 +105,28 @@ public class App {
                     System.out.println(equipamento.toString());
                 }
 
+                case 6 -> {
+                    Equipamento equipamento = escolherEquipamentoPorUsuario(sc, equipamentos);
+
+                    if (Objects.isNull(equipamento)) {
+                        System.out.println("Nenhum equipamento disponivel");
+                        break;
+                    }
+
+                    List<Chamado> chamadosDoEquipamento = ListaChamados.getChamadosList().stream()
+                            .filter(chamado -> chamado.getEquipamento().getId().equals(equipamento.getId())).toList();
+
+                    if (chamadosDoEquipamento.isEmpty()) {
+                        System.out.println("Equipamento não possui chamados");
+                        break;
+                    }
+
+                    Collections.sort(ListaChamados.getChamadosList());
+
+                    ListaChamados.getChamadosList().forEach(System.out::println);
+
+                }
+
                 case 7 -> System.out.println(ListaChamados.localizarChamados(sc));
 
                 case 8 -> System.out.println("Usuário Atual é o " + usuarioAtual);
@@ -108,6 +135,12 @@ public class App {
 
                 case 10 -> painelDeChamados(ListaChamados.getChamadosList());
                 case 11 -> listaDepartamentos.addEquipamentosAoDepartamento(sc);
+
+                // printar listas de chamados
+                case 12 -> System.out.println(ListaChamados.getChamadosList());
+                case 13 -> System.out.println(ListaChamados.getChamadosAbertosList());
+                case 14 -> System.out.println(ListaChamados.getChamadosEmAndamentoList());
+                case 15 -> System.out.println(ListaChamados.getChamadosConcluidosList());
 
                 default -> System.out.println("Entrada inválida. Tente novamente.");
             }
@@ -119,27 +152,34 @@ public class App {
         funcionarios.forEach(System.out::println);
         String opcao = sc.nextLine();
 
-        Optional<Funcionario> usuarioAtual = funcionarios.stream().filter(funcionario ->String.valueOf(funcionario.getId()).equals(opcao)).findFirst();
+        Optional<Funcionario> usuarioAtual = funcionarios.stream()
+                .filter(funcionario -> String.valueOf(funcionario.getId()).equals(opcao)).findFirst();
         return usuarioAtual.orElseGet(() -> {
             System.out.println("Escolha um funcionário válido");
             return escolherFuncionario(sc, funcionarios);
         });
     }
 
-    private static void painelDeChamados( List<Chamado> chamados) {
+    private static void painelDeChamados(List<Chamado> chamados) {
         int totalChamados = chamados.size();
         System.out.println("Total de chamados registrados: " + totalChamados);
 
-        if(totalChamados>0) {
-            int chamadosAbertos = chamados.stream().filter(chamado -> chamado.getStatus().equals(Status.ABERTO)).toList().size();
+        if (totalChamados > 0) {
+            int chamadosAbertos = chamados.stream().filter(chamado -> chamado.getStatus().equals(Status.ABERTO))
+                    .toList().size();
             System.out.println(chamadosAbertos);
-            System.out.println("Total de chamados abertos: " + chamadosAbertos + " - " + chamadosAbertos*100.0/totalChamados + "%");
+            System.out.println("Total de chamados abertos: " + chamadosAbertos + " - "
+                    + chamadosAbertos * 100.0 / totalChamados + "%");
 
-            int chamadosEmAndamento = chamados.stream().filter(chamado -> chamado.getStatus().equals(Status.EM_ANDAMENTO)).toList().size();
-            System.out.println("Total de chamados em andamento: " + chamadosEmAndamento + " - " + chamadosEmAndamento*100.0/totalChamados + "%");
+            int chamadosEmAndamento = chamados.stream()
+                    .filter(chamado -> chamado.getStatus().equals(Status.EM_ANDAMENTO)).toList().size();
+            System.out.println("Total de chamados em andamento: " + chamadosEmAndamento + " - "
+                    + chamadosEmAndamento * 100.0 / totalChamados + "%");
 
-            int chamadosConcluidos = chamados.stream().filter(chamado -> chamado.getStatus().equals(Status.CONCLUIDO)).toList().size();
-            System.out.println("Total de chamados concluidos: " + chamadosConcluidos + " - " + chamadosConcluidos*100.0/totalChamados + "%");
+            int chamadosConcluidos = chamados.stream().filter(chamado -> chamado.getStatus().equals(Status.CONCLUIDO))
+                    .toList().size();
+            System.out.println("Total de chamados concluidos: " + chamadosConcluidos + " - "
+                    + chamadosConcluidos * 100.0 / totalChamados + "%");
         }
 
     }
@@ -167,19 +207,25 @@ public class App {
 
     public static Prioridade escolherPrioridade(Scanner sc) {
         System.out.println("Escolha a prioridade do chamado");
-        System.out.println("0 - " + "Baixa");
-        System.out.println("1 - " + "Media");
-        System.out.println("2 - " + "Alta");
+        System.out.println("1 - " + "Mínima");
+        System.out.println("2 - " + "Baixa");
+        System.out.println("3 - " + "Média");
+        System.out.println("4 - " + "Alta");
+        System.out.println("5 - " + "Urgente");
 
         String prioridadeEscolhida = sc.nextLine();
 
         switch (prioridadeEscolhida) {
-            case "0":
-                return Prioridade.BAIXA;
             case "1":
-                return Prioridade.MEDIA;
+                return Prioridade.MINIMA;
             case "2":
+                return Prioridade.BAIXA;
+            case "3":
+                return Prioridade.MEDIA;
+            case "4":
                 return Prioridade.ALTA;
+            case "5":
+                return Prioridade.URGENTE;
             default:
                 System.out.println("Escolha uma prioridade válida!");
                 return escolherPrioridade(sc);
@@ -195,6 +241,27 @@ public class App {
             }
         }
         return null;
+    }
+
+    private static Equipamento escolherEquipamentoPorUsuario(Scanner sc, List<Equipamento> equipamentos) {
+        if (equipamentos.isEmpty())
+            return null;
+
+        System.out.println("Selecione o equipamento por Id:");
+
+        equipamentos
+                .forEach(equipamento -> System.out.println(equipamento.getId() + " - " + equipamento.getDescricao()));
+
+        String equipamentoEscolhido = sc.next();
+
+        Optional<Equipamento> escolhido = equipamentos.stream()
+                .filter(equipamento -> String.valueOf(equipamento.getId()).equals(equipamentoEscolhido)).findFirst();
+
+        if (escolhido.isPresent())
+            return escolhido.get();
+
+        System.out.println("Escolha um equipamento válido");
+        return escolherEquipamentoPorUsuario(sc, equipamentos);
     }
 
 }

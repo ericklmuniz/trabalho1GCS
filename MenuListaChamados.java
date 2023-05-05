@@ -90,10 +90,15 @@ public class MenuListaChamados {
     }
 
     private static void removeByStatus(){
-        System.out.println("Digite o status do chamado: ");
+        System.out.println("""
+                             Escolha o status desejado:
+                             1 - Aberto
+                             2 - Em Andamento
+                             3 - Fechado
+                           """);
         Scanner scanner = new Scanner(System.in);
-        if(scanner.hasNextLine()){
-            ListaChamados.removeByStatus(scanner.nextLine());
+        if(scanner.hasNextInt()){
+            ListaChamados.removeByStatus(scanner.nextInt());
         }
     }
 

@@ -37,12 +37,17 @@ public class ListaChamados {
         chamadosList.removeIf(chamado -> chamado.getDataSolicitacao().equals(LocalDateTime.parse(dataSolicitacao)));
     }
 
-    public static void removeByStatus(String status){
-        chamadosList.removeIf(chamado -> chamado.getStatus().equals(Status.valueOf(status)));
+    public static void removeByStatus(int status){
+        switch(status){
+            case 1 ->  chamadosList.removeIf(chamado -> chamado.getStatus().equals(Status.ABERTO));
+            case 2 ->  chamadosList.removeIf(chamado -> chamado.getStatus().equals(Status.EM_ANDAMENTO));
+            case 3 ->  chamadosList.removeIf(chamado -> chamado.getStatus().equals(Status.CONCLUIDO));
+            default -> System.out.println("Entrada inválida. Tente novamente.");
+        }
     }
 
     public static void removeByPrioridade(String prioridade){
-        chamadosList.removeIf(chamado -> chamado.getPrioridade().equals(Status.valueOf(prioridade)));
+        chamadosList.removeIf(chamado -> chamado.getPrioridade().equals(Prioridade.valueOf(prioridade)));
     }
 
     public static void removeByTextoResolucao(String textoResolucao){
@@ -134,6 +139,8 @@ public class ListaChamados {
         }
         return "\nChamados Localizados: " + saida + "\n";
     }
+
+
 
 
     // métodos padrões
