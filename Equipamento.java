@@ -12,6 +12,7 @@ public class Equipamento {
         this.descricao = descricao;
         this.dataAquisicao = dataAquisicao;
         this.departamento = departamento;
+        departamento.addEquipamento(this);
     }
 
     public Long getId() {
