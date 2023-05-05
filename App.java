@@ -182,6 +182,12 @@ public class App {
 
     }
 
+    /**
+     *
+     * @param descricao
+     * @param listaEquipamentos
+     * @return equipamento com a mesma descrição passada por parâmetro, ou null
+     */
     public static Equipamento buscarEquipamentoPorDescricao(String descricao, List<Equipamento> listaEquipamentos) {
 
         for (Equipamento equipamento : listaEquipamentos) {
