@@ -5,6 +5,9 @@ import java.util.Scanner;
 
 public class ListaChamados {
     static List<Chamado> chamadosList = new ArrayList<>();
+    static List<Chamado> chamadosAbertosList = new ArrayList<>();
+    static List<Chamado> chamadosEmAndamentoList = new ArrayList<>();
+    static List<Chamado> chamadosConcluidosList = new ArrayList<>();
 
     //ArrayList que armazena chamados localizados.
     static ArrayList<Chamado> chamadosLocalizados = new ArrayList<>();
@@ -50,6 +53,18 @@ public class ListaChamados {
         chamadosList.clear();
     }
 
+    /**
+     * adiciona todos chamados em listas diferentes, baseados no status do chamado
+     */
+    public static void addChamadosToListsByStatus(){
+        for(Chamado chamado : chamadosList){
+            switch(chamado.getStatus()){
+                case ABERTO -> chamadosAbertosList.add(chamado);
+                case EM_ANDAMENTO -> chamadosEmAndamentoList.add(chamado);
+                case CONCLUIDO ->  chamadosConcluidosList.add(chamado);
+            }
+        }
+    }
 
     /**
      * O sistema deverá permitir localizar chamados por uma palavra-chave
@@ -107,6 +122,9 @@ public class ListaChamados {
                     if(localizado.getTextoResolucao().contains(palavraChave))
                         chamadosLocalizados.add(localizado);
                     break;
+
+                default:
+                    break;
             }
         }
 
@@ -134,4 +152,17 @@ public class ListaChamados {
     public static List<Chamado> getChamadosList() {
         return chamadosList;
     }
+
+    public static List<Chamado> getChamadosAbertosList() {
+        return chamadosAbertosList;
+    }
+
+    public static List<Chamado> getChamadosEmAndamentoList() {
+        return chamadosEmAndamentoList;
+    }
+
+    public static List<Chamado> getChamadosConcluidosList() {
+        return chamadosConcluidosList;
+    }
+
 }
