@@ -111,7 +111,6 @@ public class App {
                         System.out.println("Equipamento não foi transferido!");
                     }
                     System.out.println();
-                    break;
                 }
 
                 case 4 -> // busca equipamento por descrição
@@ -127,12 +126,11 @@ public class App {
                     }
                     System.out.println("Equipamento encontrado!");
                     System.out.println(equipamento.toString());
-                    break;
                 }
 
-                case 8 -> System.out.println("Usuário Atual é o " + usuarioAtual);
-
                 case 7 -> System.out.println(ListaChamados.localizarChamados(sc));
+
+                case 8 -> System.out.println("Usuário Atual é o " + usuarioAtual);
 
                 case 9 -> MenuListaChamados.showMenu();
 
@@ -187,7 +185,7 @@ public class App {
     public static Equipamento buscarEquipamentoPorDescricao(String descricao, List<Equipamento> listaEquipamentos) {
 
         for (Equipamento equipamento : listaEquipamentos) {
-            if (equipamento.getDescricao().toLowerCase().equals(descricao.toLowerCase())) {
+            if (equipamento.getDescricao().equalsIgnoreCase(descricao)) {
                 return equipamento;
             }
         }

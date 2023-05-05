@@ -45,8 +45,8 @@ public class Funcionario {
         this.suporte = suporte;
     }
 
-    public Chamado abrirChamado(Equipamento equipamento, String descricao, Prioridade prioridade) {
-        return new Chamado(equipamento, descricao, this,
+    public void abrirChamado(Equipamento equipamento, String descricao, Prioridade prioridade) {
+        Chamado chamado = new Chamado(equipamento, descricao, this,
                 null, LocalDateTime.now(), Status.ABERTO, prioridade, null, equipamento.getDepartamento());
     }
 

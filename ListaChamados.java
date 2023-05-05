@@ -131,12 +131,6 @@ public class ListaChamados {
         chamadosList.add(chamado);
     }
 
-    public static void add (Equipamento equipamento, String descricao, Funcionario requisitante,
-                            Funcionario responsavel, LocalDateTime dataSolicitacao, Status status, Prioridade prioridade, String textoResolucao) {
-        Chamado chamado = new Chamado(equipamento, descricao, requisitante, responsavel, dataSolicitacao, status, prioridade, textoResolucao, null);
-        add(chamado);
-    }
-
     public static List<Chamado> getChamadosList() {
         return chamadosList;
     }
