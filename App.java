@@ -2,6 +2,7 @@
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class App {
 
@@ -33,7 +34,7 @@ public class App {
         equipamentos.add(new Equipamento(4L, "Projetor Epson", LocalDate.of(2021, 1, 5), RH));
         equipamentos.add(new Equipamento(5L, "Teclado Logitech", LocalDate.of(2021, 5, 2), vendas));
 
-        Funcionario usuarioAtual = seis; // usario logado no momento
+        Funcionario usuarioAtual = seis; // usuario logado no momento
 
         System.out.println("Escolher Funcionario");
         System.out.println("1: " + um.toString());
@@ -69,6 +70,8 @@ public class App {
             System.out.println("7: Localizar chamados por uma palavra-chave");
             System.out.println("8: Exibir funcionário logado");
             System.out.println("9: Modificar a lista de chamados");
+            System.out.println("10: Painel de chamados");
+            System.out.println("11: Adiciona novo equipamento");
             System.out.println("0: Encerrar Programa");
             int escolha = sc.nextInt();
 
@@ -108,7 +111,6 @@ public class App {
                     sc.nextLine();
                     String descricao = sc.nextLine();
                     Equipamento equipamento = buscarEquipamentoPorDescricao(descricao, equipamentos);
-                    System.out.println(equipamento.getId());
                     if (Objects.isNull(equipamento)) {
                         System.out.println("Equipamento não encontrado!");
                         break;
@@ -123,14 +125,34 @@ public class App {
 
                 case 9 -> MenuListaChamados.showMenu();
 
-                case 10 -> listaDepartamentos.addEquipamentosAoDepartamento(sc);
+                case 10 -> painelDeChamados(ListaChamados.getChamadosList());
 
+                case 11 -> listaDepartamentos.addEquipamentosAoDepartamento(sc);
+                
                 default -> System.out.println("Entrada inválida. Tente novamente.");
             }
         } while (!encerrado);
     }
 
-    public static Equipamento escolherEquipamento(Scanner sc, Funcionario usuarioAtual) {
+    private static void painelDeChamados( List<Chamado> chamados) {
+        int totalChamados = chamados.size();
+        System.out.println("Total de chamados registrados: " + totalChamados);
+
+        if(totalChamados>0) {
+            int chamadosAbertos = chamados.stream().filter(chamado -> chamado.getStatus().equals(Status.ABERTO)).toList().size();
+            System.out.println(chamadosAbertos);
+            System.out.println("Total de chamados abertos: " + chamadosAbertos + " - " + chamadosAbertos*100.0/totalChamados + "%");
+
+            int chamadosEmAndamento = chamados.stream().filter(chamado -> chamado.getStatus().equals(Status.EM_ANDAMENTO)).toList().size();
+            System.out.println("Total de chamados abertos: " + chamadosEmAndamento + " - " + chamadosEmAndamento*100.0/totalChamados + "%");
+
+            int chamadosConcluidos = chamados.stream().filter(chamado -> chamado.getStatus().equals(Status.CONCLUIDO)).toList().size();
+            System.out.println("Total de chamados abertos: " + chamadosConcluidos + " - " + chamadosConcluidos*100.0/totalChamados + "%");
+        }
+
+    }
+
+    private static Equipamento escolherEquipamento(Scanner sc, Funcionario usuarioAtual) {
         if (usuarioAtual.getDepartamento().getEquipamentos().isEmpty())
             return null;
 
